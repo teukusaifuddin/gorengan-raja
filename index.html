@@ -1998,7 +1998,7 @@ body.present .pexit{display:inline-flex}
     $('iv-empty').hidden=has;$('iv-body').hidden=!has;$('iv-years').hidden=!has;
     var scopeName=U.ivs==='all'?'semua outlet':oname(+U.ivs);
     $('iv-intro').textContent=(has?'Data penjualan '+scopeName+' dari '+fmtDY(keys[0])+' sampai '+fmtDY(keys[keys.length-1])+'. ':'Belum ada data penjualan harian. ')+'Bagian bawah berisi proyeksi bagi hasil untuk '+oname(invIdx())+'.';
-    $('iv-tag').textContent=S.demo?'Data contoh + proyeksi':'Data nyata + proyeksi';
+    $('iv-tag').textContent=S.demo?'Data contoh + proyeksi':(has?'Data nyata + proyeksi':'Proyeksi (belum ada data penjualan)');
     if(has){
       var ps=periods(map,U.ivm),last=ps[ps.length-1],prev=ps.length>1?ps[ps.length-2]:null,names={d:'hari',w:'minggu',m:'bulan',y:'tahun'};
       $('il1').textContent='Omzet '+(U.ivm==='d'?'hari terakhir':names[U.ivm]+' terakhir');
