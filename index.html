@@ -286,6 +286,7 @@ body{padding:0}
 @media (prefers-reduced-motion: reduce){.side{transition:none}}
 body.present .side,body.present .menubtn{display:none !important}
 body.present .shell{grid-template-columns:minmax(0,1fr)}
+body.present .main{padding-bottom:110px}
 
 /* ===== Tiga jawaban utama ===== */
 .answers{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:12px}
@@ -345,6 +346,38 @@ body.on-partner .mini{display:none !important}
 .bepbar .mk.t span{color:var(--red);bottom:auto;top:50px}
 .bepbar .mk.l span{left:0}.bepbar .mk.r span{right:0}
 .bepscale{font-size:12px;color:var(--muted);margin:-8px 0 0}
+
+
+/* ===== Investor & harian ===== */
+.ivsum{margin:14px 0 0;background:var(--bg);border-left:5px solid var(--gold-deep);border-radius:10px;padding:12px 14px;font-size:15px;line-height:1.55}
+.ivsum b{font-family:var(--f-num);font-weight:600}
+.ivsum .up{color:var(--good);font-weight:700}.ivsum .down{color:var(--bad);font-weight:700}
+mark.hl{background:var(--gold-soft);color:var(--ink);padding:1px 6px;border-radius:6px;font-weight:700;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hlbox{border:2px solid var(--gold-deep);background:var(--gold-soft);border-radius:14px;padding:14px 16px 16px;margin:6px 0 14px}
+.hlbox h3{margin:0 0 4px;font-family:var(--f-display);font-weight:600;font-size:18px;color:var(--red)}
+.hlbox p{margin:0 0 10px;font-size:14px}
+.split{display:flex;height:40px;border-radius:10px;overflow:hidden;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--gold-deep)}
+.split div{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;padding:0 8px;min-width:0}
+.split .si{background:var(--gold-deep);color:#3A1A00}
+.split .so2{background:var(--red);color:#fff}
+.splitlbl{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin:6px 0 2px;font-weight:600}
+.phase{font-size:13px;font-weight:700;color:var(--muted);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.keyline{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:14px}
+.keyline b{font-family:var(--f-num);font-weight:600;font-size:16px}
+th.hc,td.hc{background:var(--gold-soft)}
+th.hc{color:var(--ink)}
+td.hc{font-weight:700}
+.note b{color:var(--ink)}
+
+.cbl{fill:var(--gold-deep)}
+.cbe{fill:var(--line)}
+.avgl{stroke:var(--ink);stroke-width:1.2;stroke-dasharray:5 4;opacity:.7}
+.avgt{fill:var(--ink);font-size:11px;font-family:var(--f-body);font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+#iv_modes .chip.on,[data-skema].on{background:var(--red);border-color:var(--red);color:#fff}
+tr.today td{background:var(--gold-soft)}
+#ivtab td:first-child,#ivytab td:first-child,#dd_tab td:first-child{white-space:nowrap}
+#dd_tab .tbtn{white-space:nowrap}
+.tbtn{background:none;border:0;padding:6px 4px;color:var(--red);font-weight:700;font-family:var(--f-body);font-size:13px;text-decoration:underline;text-underline-offset:3px}
 
 /* Tabel */
 .tablewrap.scrollable::before{content:"Geser tabel ke samping untuk melihat semua kolom →";position:sticky;left:0;display:block;font-size:12px;color:var(--muted);margin-bottom:6px;white-space:nowrap}
@@ -440,10 +473,12 @@ body.present .pexit{display:inline-flex}
   <div class="navrow"><button class="navi" type="button" data-nav="out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9v11h18V9M9 20v-6h6v6"/></svg><b>Outlet <span class="ocount" id="ocount"></span></b><small>Angka tiap outlet</small></button><button class="chev" id="outToggle" type="button" aria-controls="sideOutlets" aria-expanded="true" aria-label="Buka atau tutup daftar outlet"><span class="chi" aria-hidden="true"></span></button></div>
   <div class="souts" id="sideOutlets"></div>
   <div class="slabel">Pantau</div>
+  <button class="navi" type="button" data-nav="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7.5 14h3M7.5 17h6"/></svg><b>Penjualan Harian</b><small>Catat omzet setiap hari</small></button>
   <button class="navi" type="button" data-nav="real"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><b>Rencana vs Nyata</b><small>Isi hasil tiap akhir bulan</small></button>
-  <div class="slabel">Kemitraan</div>
+  <div class="slabel">Kemitraan &amp; investor</div>
   <button class="navi" type="button" data-nav="mitra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V6l8-3 8 3v15M2 21h20M9 21v-4h6v4M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01"/></svg><b>Pusat</b><small>Atur skema dan cek ekonomi pusat</small></button>
   <button class="navi" type="button" data-nav="partner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.6-7 9.5-4.1-1.9-7-5.2-7-9.5V6z"/><path d="M9 12l2 2 4-4.5"/></svg><b>Halaman Mitra</b><small>Yang dilihat calon mitra</small></button>
+  <button class="navi" type="button" data-nav="investor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 16l4.5-5 3.5 3 6-7"/><path d="M15 7h4v4"/></svg><b>Halaman Investor</b><small>Pertumbuhan dan bagi hasil</small></button>
   <div class="slabel">Bantuan</div>
   <button class="navi" type="button" data-nav="help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></svg><b>Cara pakai</b><small>Panduan dan arti istilah</small></button>
   <div class="sfoot">
@@ -741,6 +776,129 @@ body.present .pexit{display:inline-flex}
       </div>
     </div>
   </div>
+  <!-- ===================== PENJUALAN HARIAN ===================== -->
+  <div id="view-daily" class="results" hidden>
+    <div class="alert" id="demoBanner" hidden><b>Sedang memakai DATA CONTOH.</b>Data ini dibuat otomatis untuk latihan, bukan penjualan nyata. Hapus data contoh sebelum mengisi data nyata. <button class="lnk" type="button" id="demoClear2">Hapus data contoh</button></div>
+    <div class="two">
+      <section class="card">
+        <h2>Catat penjualan hari ini</h2>
+        <p class="d">Isi setiap tutup toko. Angka bisa disalin dari aplikasi kasir atau buku catatan.</p>
+        <div class="form2" style="grid-template-columns:minmax(0,1fr)">
+          <div class="field"><div class="fh"><label for="dd_date">Tanggal</label><input type="date" id="dd_date" class="sel" style="width:178px"></div></div>
+          <div class="field"><div class="fh"><label for="dd_out">Outlet</label><select id="dd_out" class="sel" style="width:178px"></select></div></div>
+          <div class="field"><div class="fh"><label for="dd_t">Jumlah transaksi</label><div class="inp w"><input id="dd_t" type="number" inputmode="numeric" min="0" step="1" placeholder="0"><span class="sf">struk</span></div></div><small>Berapa kali pembeli membayar.</small></div>
+          <div class="field"><div class="fh"><label for="dd_p">Paket terjual</label><div class="inp w"><input id="dd_p" type="number" inputmode="numeric" min="0" step="1" placeholder="0"><span class="sf">paket</span></div></div></div>
+          <div class="field"><div class="fh"><label for="dd_o">Omzet hari ini</label><div class="inp w"><span class="pf">Rp</span><input id="dd_o" type="number" inputmode="numeric" min="0" step="1000" placeholder="0"></div></div><small id="dd_hint"></small></div>
+        </div>
+        <div class="row" style="margin-top:14px"><button class="btn" id="dd_save" type="button">Simpan</button><button class="chip danger" id="dd_del" type="button" hidden>Hapus data tanggal ini</button><span class="msg" id="dd_msg" role="status"></span></div>
+      </section>
+      <section class="card">
+        <h2>14 hari terakhir</h2>
+        <p class="d" id="dd_sum"></p>
+        <div class="tablewrap"><table id="dd_tab"></table></div>
+      </section>
+    </div>
+    <div class="two">
+      <section class="card">
+        <h2>Impor dari aplikasi kasir</h2>
+        <p class="d">Unggah file CSV dengan kolom: <b>tanggal, outlet, transaksi, paket, omzet</b>. Tanggal boleh 2026-10-15 atau 15/10/2026. Kalau kolom outlet kosong atau namanya tidak cocok, data masuk ke outlet yang dipilih di kiri.</p>
+        <div class="row">
+          <label class="btn sec" for="dd_csv" style="cursor:pointer">Pilih file CSV</label><input type="file" id="dd_csv" accept=".csv,text/csv,text/plain" hidden>
+          <button class="chip needdl" id="dd_tpl" type="button" hidden>Unduh contoh format</button>
+        </div>
+        <p class="msg" id="dd_csvmsg" role="status" style="margin-top:10px"></p>
+      </section>
+      <section class="card internal">
+        <h2>Belum ada data? Coba dengan data contoh</h2>
+        <p class="d">Membuat 120 hari data penjualan buatan untuk outlet yang sudah buka, supaya Anda bisa mempelajari Halaman Investor. Ditandai jelas sebagai DATA CONTOH.</p>
+        <div class="row"><button class="btn sec" id="demoMake" type="button">Buat data contoh</button><button class="chip danger" id="demoClear" type="button" hidden>Hapus data contoh</button></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===================== HALAMAN INVESTOR ===================== -->
+  <div id="view-investor" class="results" hidden>
+    <section class="pthero">
+      <div><h2>Laporan untuk investor</h2><p id="iv-intro"></p></div>
+      <span class="tag" id="iv-tag">Data nyata + proyeksi</span>
+    </section>
+    <div class="alert" id="ivDemo" hidden><b>DATA CONTOH.</b>Grafik penjualan di halaman ini memakai data buatan untuk latihan, bukan penjualan nyata.</div>
+
+    <section class="card internal">
+      <h2>Atur skema investasi</h2>
+      <p class="d">Hanya terlihat oleh Anda. Saat Mode presentasi, investor hanya melihat ringkasan kesepakatan di bawah.</p>
+      <div class="form2">
+        <div class="field"><div class="fh"><label for="iv_out">Outlet yang didanai</label><select id="iv_out" class="sel" style="width:178px"></select></div></div>
+        <div class="field"><div class="fh"><label for="iv_modal">Modal dari investor</label><div class="inp w"><span class="pf">Rp</span><input id="iv_modal" type="number" inputmode="numeric" min="0" step="1000000"></div></div></div>
+      </div>
+      <div class="presets" role="group" aria-label="Pilih skema" style="margin-top:14px"><span class="pl">Skema:</span>
+        <button class="chip" type="button" data-skema="laba">Bagi hasil laba</button><button class="chip" type="button" data-skema="omzet">Bagi hasil omzet</button><button class="chip" type="button" data-skema="cap">Bagi hasil dengan batas</button>
+      </div>
+      <div class="form2" style="margin-top:12px">
+        <div class="field" data-for="laba cap"><div class="fh"><label for="iv_p">Bagian investor dari laba bersih</label><div class="inp"><input id="iv_p" type="number" inputmode="decimal" min="0" max="100" step="5"><span class="sf">%</span></div></div></div>
+        <div class="field" data-for="omzet"><div class="fh"><label for="iv_po">Bagian investor dari omzet</label><div class="inp"><input id="iv_po" type="number" inputmode="decimal" min="0" max="30" step="0.5"><span class="sf">%</span></div></div><small>Hati-hati: dibayar walau outlet sedang rugi.</small></div>
+        <div class="field" data-for="cap"><div class="fh"><label for="iv_cap">Sampai investor menerima</label><div class="inp"><input id="iv_cap" type="number" inputmode="decimal" min="1" max="5" step="0.1"><span class="sf">× modal</span></div></div></div>
+        <div class="field" data-for="cap"><div class="fh"><label for="iv_after">Setelah itu bagian investor</label><div class="inp"><input id="iv_after" type="number" inputmode="decimal" min="0" max="100" step="5"><span class="sf">% laba</span></div></div></div>
+      </div>
+      <p class="hint" style="margin-top:10px">Angka awal adalah contoh. Skema final dibuat tertulis di notaris dan ditinjau penasihat hukum. Jangan menjanjikan hasil tetap, dan jangan menghimpun dana dari banyak orang umum.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ringkasan kesepakatan</h2>
+      <div class="hlbox" id="iv-split"></div>
+      <ul class="chk" id="iv-terms"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Pertumbuhan penjualan</h2>
+      <div class="row" style="margin-bottom:10px">
+        <label class="pl" for="iv_scope">Tampilkan</label><select id="iv_scope" class="sel"></select>
+      </div>
+      <div class="presets" role="group" aria-label="Periode" id="iv_modes">
+        <button class="chip" type="button" data-mode="d">Harian</button><button class="chip" type="button" data-mode="w">Mingguan</button><button class="chip" type="button" data-mode="m">Bulanan</button><button class="chip" type="button" data-mode="y">Tahunan</button>
+      </div>
+      <div id="iv-empty" class="alert info" style="margin-top:14px" hidden><b>Belum ada data penjualan harian.</b>Isi di menu Penjualan Harian, impor dari aplikasi kasir, atau coba dulu dengan data contoh. <button class="lnk" type="button" data-goto="daily">Buka Penjualan Harian</button></div>
+      <div id="iv-body">
+        <p class="ivsum" id="iv-sum" role="status"></p>
+        <div class="kpis" style="margin-top:14px">
+          <div class="kpi" id="ik1"><span class="l" id="il1"></span><span class="v" id="iv1"></span><span class="n" id="in1"></span></div>
+          <div class="kpi" id="ik2"><span class="l">Pertumbuhan<button type="button" class="q" data-q="tumbuh" aria-label="Apa artinya?">?</button></span><span class="v" id="iv2"></span><span class="n" id="in2"></span></div>
+          <div class="kpi" id="ik3"><span class="l">Rata-rata omzet per hari</span><span class="v" id="iv3"></span><span class="n" id="in3"></span></div>
+          <div class="kpi" id="ik4"><span class="l">Total sejak buka</span><span class="v" id="iv4"></span><span class="n" id="in4"></span></div>
+        </div>
+        <div class="chart" id="ivchart" style="margin-top:14px"></div>
+        <div class="legend"><span><i class="sq" style="background:var(--good)"></i>Omzet per periode</span><span><i class="sq" style="background:var(--gold-deep)"></i>Periode terakhir</span><span><i class="sq" style="background:var(--line)"></i>Tidak ada data</span></div>
+        <details class="tb"><summary>Lihat tabel</summary><div class="tablewrap"><table id="ivtab"></table></div></details>
+      </div>
+    </section>
+
+    <section class="card" id="iv-years">
+      <h2>Total per tahun dan kumulatif (data nyata)</h2>
+      <p class="d">Tahun ke-1 dihitung dari tanggal pertama ada data penjualan.</p>
+      <div class="tablewrap"><table id="ivytab"></table></div>
+    </section>
+
+    <section class="card">
+      <h2>Proyeksi bagi hasil investor</h2>
+      <p class="d" id="iv-proj-desc"></p>
+      <section class="answers" style="margin-bottom:14px">
+        <div class="kpi ans" id="ia1"><span class="l"><span class="num">1</span>Investor terima per bulan</span><span class="v" id="ip1"></span><span class="n" id="iq1"></span></div>
+        <div class="kpi ans" id="ia2"><span class="l"><span class="num">2</span>Modal investor kembali</span><span class="v" id="ip2"></span><span class="n" id="iq2"></span></div>
+        <div class="kpi ans" id="ia3"><span class="l"><span class="num">3</span>Total investor 3 tahun</span><span class="v" id="ip3"></span><span class="n" id="iq3"></span></div>
+      </section>
+      <div class="tablewrap"><table id="ivptab"></table></div>
+      <p class="hint" style="margin-top:8px">Proyeksi memakai angka outlet di menu Outlet dan termasuk bulan-bulan awal yang lebih sepi. <mark class="hl" id="iv-rugi">Bulan rugi tidak memberi bagi hasil laba.</mark></p>
+    </section>
+
+    <section class="card" id="iv-real">
+      <h2>Bagi hasil dari laporan bulanan</h2>
+      <p class="d">Dihitung dari angka nyata di menu Rencana vs Nyata untuk outlet yang didanai.</p>
+      <div class="tablewrap"><table id="ivrtab"></table></div>
+    </section>
+
+    <p class="note">Laporan ini berisi data penjualan dan proyeksi berdasarkan asumsi. <b>Proyeksi bukan janji hasil.</b> <b>Investasi usaha memiliki risiko, termasuk rugi.</b> Hak dan kewajiban investor mengikuti <b>perjanjian tertulis yang ditandatangani kedua pihak</b>.</p>
+  </div>
+
   <!-- ===================== HALAMAN MITRA ===================== -->
   <div id="view-partner" class="results" hidden>
     <section class="pthero">
@@ -845,12 +1003,13 @@ body.present .pexit{display:inline-flex}
   <!-- ===================== CARA PAKAI ===================== -->
   <div id="view-help" class="results" hidden>
     <section class="card">
-      <h2>Lima langkah memakai sistem ini</h2>
+      <h2>Langkah memakai sistem ini</h2>
       <p class="d">Ikuti urutannya. Langkah 1 sampai 3 untuk merencanakan, langkah 4 dikerjakan rutin setelah outlet buka.</p>
       <ol class="steps">
         <li><b>Hitung biaya bahan per paket</b><p>Di Resep &amp; HPP, masukkan bahan yang dipakai untuk satu paket beserta harga dari nota belanja. Sistem menghitung biaya bahan dan harga jual minimal.</p><button class="btn sec" type="button" data-goto="resep">Buka Resep &amp; HPP</button></li>
         <li><b>Atur angka tiap outlet</b><p>Di Outlet, isi target paket per hari, gaji, sewa, modal, dan bulan buka. Isi juga upah pemilik, dana ganti alat, izin, dan pajak.</p><button class="btn sec" type="button" data-goto="out">Buka Outlet</button></li>
         <li><b>Baca Ringkasan</b><p>Lihat tiga jawaban utama: untung per bulan, kapan modal kembali, dan uang yang perlu disiapkan. Perhatikan warna lampu status.</p><button class="btn sec" type="button" data-goto="dash">Buka Ringkasan</button></li>
+        <li><b>Setiap hari, catat penjualan</b><p>Di Penjualan Harian, isi transaksi, paket, dan omzet setiap tutup toko, atau impor dari aplikasi kasir. Datanya muncul di Halaman Investor sebagai grafik harian, mingguan, bulanan, dan tahunan.</p><button class="btn sec" type="button" data-goto="daily">Buka Penjualan Harian</button></li>
         <li><b>Setiap akhir bulan, isi data nyata</b><p>Di Rencana vs Nyata, salin angka dari kasir dan nota belanja. Sistem menunjukkan capaian target, bisa lebih dari 100%.</p><button class="btn sec" type="button" data-goto="real">Buka Rencana vs Nyata</button></li>
         <li><b>Nanti: siapkan kemitraan</b><p>Di Pusat, atur royalti, fee, dan biaya pusat sampai adil untuk kedua pihak. Lalu tunjukkan Halaman Mitra ke calon mitra. Ini simulasi, belum penawaran waralaba.</p><button class="btn sec" type="button" data-goto="mitra">Buka Pusat</button></li>
       </ol>
@@ -933,6 +1092,7 @@ body.present .pexit{display:inline-flex}
     {id:'bina',l:'Biaya pembinaan per mitra',pf:'Rp',min:0,max:5000000,step:50000,h:'Per bulan: QA, kunjungan, pelatihan, sistem.'},
     {id:'ovh',l:'Overhead pusat',pf:'Rp',min:0,max:50000000,step:500000,h:'Per bulan: tim pusat, kantor, gudang. Mulai dihitung saat mitra pertama buka.'}
   ];
+  var DEFI={oid:'',modal:20000000,skema:'laba',p:40,po:5,cap:1.5,after:10};
   var DEFM={roy:0,iur:0,fee:0,supShare:0,supMk:0,bina:0,ovh:0};
   var EXM={roy:5,iur:1,fee:10000000,supShare:50,supMk:10,bina:300000,ovh:5000000};
   var KAT={bahan:'Bahan',minyak:'Minyak',gas:'Gas',kemasan:'Kemasan'};
@@ -956,17 +1116,23 @@ body.present .pexit{display:inline-flex}
     {n:'Gas LPG 3 kg',k:'gas',b:22000,q:60,s:'paket',u:1},
     {n:'Kemasan dan saus',k:'kemasan',b:1200,q:1,s:'pcs',u:1}
   ]}]}
-  function defaults(){return {v:3,ref:'',outs:[mkOut('Outlet 1',1),mkOut('Outlet 2',4),mkOut('Outlet 3',7)],target:50000000,cad:2,hppT:50,menus:defMenus(),real:{},M:Object.assign({},DEFM),shock:{minyak:0,semua:0},updated:0}}
+  function defaults(){return {v:3,daily:{},demo:false,inv:Object.assign({},DEFI),ref:'',outs:[mkOut('Outlet 1',1),mkOut('Outlet 2',4),mkOut('Outlet 3',7)],target:50000000,cad:2,hppT:50,menus:defMenus(),real:{},M:Object.assign({},DEFM),shock:{minyak:0,semua:0},updated:0}}
   var S=defaults();
-  var U={pj:null,pm:12,so:null,tab:'dash',oi:0,mo:12,dn:-1,ro:0,rm:1,undo:null};
+  var U={ivm:'w',ivs:'all',ddo:0,ddd:'',pj:null,pm:12,so:null,tab:'dash',oi:0,mo:12,dn:-1,ro:0,rm:1,undo:null};
 
   /* ---------- Simpan dan muat ---------- */
   var KEY='gr-sys-v3',OLD='gr-calc-v2';
-  function pack(){return {v:3,ref:S.ref||'',outs:S.outs,target:S.target,cad:S.cad,hppT:S.hppT,menus:S.menus,real:S.real,M:S.M,shock:S.shock,updated:S.updated}}
+  function pack(){return {v:3,daily:S.daily,demo:!!S.demo,inv:S.inv,ref:S.ref||'',outs:S.outs,target:S.target,cad:S.cad,hppT:S.hppT,menus:S.menus,real:S.real,M:S.M,shock:S.shock,updated:S.updated}}
   function cleanMenus(a){
     if(!Array.isArray(a))return null;
     var r=a.slice(0,20).map(function(m){return {name:String(m&&m.name||'Menu').slice(0,40),harga:num(m&&m.harga),mix:num(m&&m.mix),
       items:(Array.isArray(m&&m.items)?m.items:[]).slice(0,40).map(function(it){return {n:String(it&&it.n||'').slice(0,40),k:KAT[it&&it.k]?it.k:'bahan',b:num(it&&it.b),q:num(it&&it.q),s:String(it&&it.s||'').slice(0,12),u:num(it&&it.u)}})}});
+    return r;
+  }
+  function cleanDaily(o){
+    var r={};if(!o||typeof o!=='object')return r;
+    Object.keys(o).slice(0,60).forEach(function(id){var mm=o[id];if(!mm||typeof mm!=='object')return;r[id]={};
+      Object.keys(mm).forEach(function(d){if(!/^\d{4}-\d{2}-\d{2}$/.test(d))return;var x=mm[d]||{};r[id][d]={t:Math.max(0,num(x.t)),p:Math.max(0,num(x.p)),o:Math.max(0,num(x.o))}})});
     return r;
   }
   function cleanReal(o){
@@ -986,7 +1152,7 @@ body.present .pexit{display:inline-flex}
       n.useResep=v3&&typeof o.useResep==='boolean'?o.useResep:false;
       return n});
     var r={v:3,ref:typeof j.ref==='string'?j.ref.slice(0,20):'',outs:outs,target:numOr(j.target,d.target),cad:numOr(j.cad,2),hppT:numOr(j.hppT,50),menus:(v3&&cleanMenus(j.menus))||d.menus,
-      real:cleanReal(j.real),M:Object.assign({},DEFM),shock:{minyak:0,semua:0},updated:numOr(j.updated,0)};
+      real:cleanReal(j.real),daily:cleanDaily(j.daily),demo:!!j.demo,inv:(function(){var x=Object.assign({},DEFI);if(j.inv&&typeof j.inv==='object'){Object.keys(DEFI).forEach(function(k){if(k==='oid'||k==='skema'){if(typeof j.inv[k]==='string')x[k]=j.inv[k].slice(0,20)}else if(typeof j.inv[k]==='number'&&isFinite(j.inv[k]))x[k]=j.inv[k]})}return x})(),M:Object.assign({},DEFM),shock:{minyak:0,semua:0},updated:numOr(j.updated,0)};
     if(j.M&&typeof j.M==='object')Object.keys(DEFM).forEach(function(k){if(typeof j.M[k]==='number'&&isFinite(j.M[k]))r.M[k]=j.M[k]});
     if(j.shock&&typeof j.shock==='object'){r.shock.minyak=numOr(j.shock.minyak,0);r.shock.semua=numOr(j.shock.semua,0)}
     return r;
@@ -1008,8 +1174,10 @@ body.present .pexit{display:inline-flex}
   function flush(){
     if(!dbRef)return;
     if(saving){again=true;return}
+    var js=JSON.stringify(pack());
+    if(js.length>240000){setSync('Data terlalu besar untuk akun, tersimpan di browser. Unduh cadangan.');return}
     saving=true;setSync('Menyimpan...');
-    dbRef.set({json:JSON.stringify(pack()),updated:S.updated}).then(function(){setSync('Tersimpan di akun Anda')},function(e){
+    dbRef.set({json:js,updated:S.updated}).then(function(){setSync('Tersimpan di akun Anda')},function(e){
       if(e&&(e.code==='invalid_argument'||e.code==='revoked'||e.code==='not_granted')){dbRef=null;setSync('Tersimpan di browser ini')}
       else setSync('Belum tersinkron, tersimpan di browser');
     }).then(function(){saving=false;if(again){again=false;flush()}});
@@ -1624,16 +1792,16 @@ body.present .pexit{display:inline-flex}
     compute();
     if(U.oi>=S.outs.length)U.oi=0;
     renderNav();
-    document.body.classList.toggle('on-partner',U.tab==='partner');
-    ['dash','out','resep','real','mitra','partner','help'].forEach(function(v){$('view-'+v).hidden=U.tab!==v});
+    document.body.classList.toggle('on-partner',U.tab==='partner'||U.tab==='investor');
+    ['dash','out','resep','real','mitra','partner','investor','daily','help'].forEach(function(v){$('view-'+v).hidden=U.tab!==v});
     $('m1').textContent=rpS(C.Co.lab);$('m2').textContent=bepText(C.Co.bep);$('m3').textContent=S.outs.length+' outlet';
     $('target').value=S.target;$('target_r').value=S.target;
     requestAnimationFrame(function(){document.querySelectorAll('.tablewrap').forEach(function(t){t.classList.toggle('scrollable',t.scrollWidth>t.clientWidth+2)})});
-    if(U.tab==='dash')renderDash();else if(U.tab==='out')renderOut();else if(U.tab==='resep')updResep();else if(U.tab==='real')updReal();else if(U.tab==='mitra')updMitra();else if(U.tab==='partner')renderPartner();
+    if(U.tab==='dash')renderDash();else if(U.tab==='out')renderOut();else if(U.tab==='resep')updResep();else if(U.tab==='real')updReal();else if(U.tab==='mitra')updMitra();else if(U.tab==='partner')renderPartner();else if(U.tab==='daily')updDaily();else if(U.tab==='investor')renderInvestor();
   }
   function go(tab,oi){
     if(tab!==U.tab){U.so=null;if(U.tab==='partner')U.pj=null}U.tab=tab;if(typeof oi==='number')U.oi=oi;if(U.oi>=S.outs.length)U.oi=0;
-    if(tab==='resep')buildResep();if(tab==='real'){if(typeof oi==='number')U.ro=oi;buildReal()}if(tab==='mitra')buildMitra();
+    if(tab==='resep')buildResep();if(tab==='real'){if(typeof oi==='number')U.ro=oi;buildReal()}if(tab==='mitra')buildMitra();if(tab==='daily')buildDaily();if(tab==='investor')buildInvestor();
     closeSide();closeQ();render();if(tab==='out')syncPanel();
     window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
   }
@@ -1662,6 +1830,7 @@ body.present .pexit{display:inline-flex}
     susut:['Susut','Gorengan yang tidak laku atau rusak dan harus dibuang. Dihitung sebagai persen dari omzet.'],
     capaian:['Capaian','Hasil nyata dibanding target. 100% = pas target, 150% = 1,5 kali target, 80% = kurang dari target.'],
     pusat:['Pendapatan pusat','Uang yang diterima pusat dari mitra: royalti, iuran marketing, dan selisih harga bahan. Penjualan mitra bukan pendapatan pusat.'],
+    tumbuh:['Pertumbuhan','Perubahan rata-rata omzet per hari dibanding periode sebelumnya yang sama panjang. Harian: dibanding hari yang sama minggu lalu. Mingguan: 7 hari terakhir dibanding 7 hari sebelumnya. Bulanan dan tahunan memakai 30 dan 365 hari.'],
     q:['Tombol penjelas','Tekan tanda tanya di samping angka atau judul untuk membaca artinya dengan bahasa sederhana.']
   };
   var qpop=null,qbtn=null;
@@ -1689,6 +1858,8 @@ body.present .pexit{display:inline-flex}
     resep:['Resep & HPP','Hitung biaya bahan untuk satu paket dari nota belanja.'],
     real:['Rencana vs Nyata','Setiap akhir bulan, isi hasil nyata dan bandingkan dengan target.'],
     mitra:['Pusat','Atur skema kemitraan dan pastikan pusat juga sehat. Angka di sini dipakai otomatis di Halaman Mitra.'],
+    daily:['Penjualan Harian','Catat transaksi, paket, dan omzet setiap hari. Data ini menjadi grafik di Halaman Investor.'],
+    investor:['Halaman Investor','Laporan untuk investor: pertumbuhan penjualan harian sampai tahunan, dan proyeksi bagi hasil.'],
     partner:['Halaman Mitra','Halaman untuk calon mitra: estimasi penjualan, omzet, titik impas, dan pendapatan mitra.'],
     help:['Cara pakai','Langkah memakai sistem ini, arti lampu status, dan arti istilah.']
   };
@@ -1698,6 +1869,227 @@ body.present .pexit{display:inline-flex}
   $('scrim').addEventListener('click',closeSide);
   $('outToggle').addEventListener('click',function(){var open=!$('sideOutlets').hidden;U.so=!open;renderNav()});
 
+
+
+  /* ================= PENJUALAN HARIAN ================= */
+  var MON=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  function pad(n){return (n<10?'0':'')+n}
+  function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+  function pd(s){var a=s.split('-');return new Date(+a[0],a[1]-1,+a[2])}
+  function addDays(s,k){var d=pd(s);d.setDate(d.getDate()+k);return ymd(d)}
+  function weekStart(s){var d=pd(s);d.setDate(d.getDate()-((d.getDay()+6)%7));return ymd(d)}
+  function dayDiff(a,b){return Math.round((pd(b)-pd(a))/864e5)}
+  function fmtD(s){var d=pd(s);return d.getDate()+' '+MON[d.getMonth()]}
+  function fmtDY(s){var d=pd(s);return d.getDate()+' '+MON[d.getMonth()]+' '+d.getFullYear()}
+  var HARI=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  function dailyOf(id){return S.daily[id]||{}}
+  function buildDaily(){
+    if(U.ddo>=S.outs.length)U.ddo=0;
+    $('dd_out').innerHTML=S.outs.map(function(p,i){return '<option value="'+i+'"'+(i===U.ddo?' selected':'')+'>'+esc(oname(i))+'</option>'}).join('');
+    if(!U.ddd)U.ddd=ymd(new Date());$('dd_date').value=U.ddd;fillDaily();
+  }
+  function fillDaily(){
+    var e=dailyOf(S.outs[U.ddo].id)[U.ddd];
+    $('dd_t').value=e?e.t:'';$('dd_p').value=e?e.p:'';$('dd_o').value=e?e.o:'';
+    $('dd_save').textContent=e?'Perbarui':'Simpan';$('dd_del').hidden=!e;$('dd_msg').textContent='';ddHint();
+  }
+  function ddHint(){var q=C.E[U.ddo],p=num($('dd_p').value);$('dd_hint').textContent=p>0&&q?'Perkiraan dari paket × harga rata-rata: '+rp(p*q.harga)+'. Isi angka sebenarnya dari kasir.':''}
+  function updDaily(){
+    $('demoBanner').hidden=!S.demo;$('demoClear').hidden=!S.demo;$('demoMake').hidden=!!S.demo;
+    var id=S.outs[U.ddo].id,dd=dailyOf(id),keys=Object.keys(dd).sort().reverse(),last=keys.slice(0,14);
+    var tot=keys.reduce(function(a,k){return a+dd[k].o},0);
+    $('dd_sum').textContent=keys.length?oname(U.ddo)+': '+keys.length+' hari tercatat, total omzet '+rp(tot)+'. Klik tanggal untuk mengubah.':'Belum ada catatan untuk '+oname(U.ddo)+'.';
+    $('dd_tab').innerHTML=last.length?'<thead><tr><th>Tanggal</th><th>Transaksi</th><th>Paket</th><th>Omzet</th></tr></thead><tbody>'+last.map(function(k){var e=dd[k];return '<tr'+(k===U.ddd?' class="today"':'')+'><td><button class="tbtn" type="button" data-dday="'+k+'">'+HARI[pd(k).getDay()]+', '+fmtDY(k)+'</button></td><td>'+nf.format(e.t)+'</td><td>'+nf.format(e.p)+'</td><td>'+rp(e.o)+'</td></tr>'}).join('')+'</tbody>':'';
+  }
+  function saveDaily(){
+    if(S.demo){$('dd_msg').textContent='Hapus data contoh dulu sebelum mengisi data nyata.';return}
+    var d=$('dd_date').value;if(!/^\d{4}-\d{2}-\d{2}$/.test(d)){$('dd_msg').textContent='Pilih tanggal dulu.';return}
+    var t=Math.max(0,num($('dd_t').value)),pk=Math.max(0,num($('dd_p').value)),o=Math.max(0,num($('dd_o').value));
+    if(!(t||pk||o)){$('dd_msg').textContent='Isi minimal salah satu angka.';return}
+    var id=S.outs[U.ddo].id;if(!S.daily[id])S.daily[id]={};S.daily[id][d]={t:t,p:pk,o:o};U.ddd=d;save();render();fillDaily();
+    $('dd_msg').textContent='Tersimpan untuk '+fmtDY(d)+'.';
+  }
+  function parseCSV(text){
+    var lines=text.replace(/\r/g,'').split('\n').filter(function(l){return l.trim()});if(!lines.length)return {rows:[],err:'File kosong.'};
+    var sep=(lines[0].split(';').length>lines[0].split(',').length)?';':',';
+    function cells(l){var out=[],cur='',q=false;for(var i=0;i<l.length;i++){var ch=l[i];if(ch==='"'){q=!q;continue}if(ch===sep&&!q){out.push(cur.trim());cur='';continue}cur+=ch}out.push(cur.trim());return out}
+    var head=cells(lines[0]).map(function(h){return h.toLowerCase()}),hasHead=head.some(function(h){return /tanggal|date|omzet|paket/.test(h)});
+    var idx={d:0,out:1,t:2,p:3,o:4};
+    if(hasHead){var f=function(re){for(var i=0;i<head.length;i++)if(re.test(head[i]))return i;return -1};idx={d:f(/tanggal|date|tgl/),out:f(/outlet|cabang|toko/),t:f(/transaksi|struk|trx/),p:f(/paket|qty|jumlah/),o:f(/omzet|omset|penjualan|total|nominal/)};lines=lines.slice(1)}
+    if(idx.d<0||idx.o<0)return {rows:[],err:'Kolom tanggal dan omzet tidak ditemukan.'};
+    var rows=[],bad=0;
+    lines.forEach(function(l){var c=cells(l),ds=c[idx.d]||'',m,d=null;
+      if((m=ds.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/)))d=m[1]+'-'+pad(+m[2])+'-'+pad(+m[3]);
+      else if((m=ds.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/)))d=m[3]+'-'+pad(+m[2])+'-'+pad(+m[1]);
+      var n=function(i){return i>=0&&c[i]!=null?num(String(c[i]).replace(/[^0-9]/g,'')):0};
+      if(!d){bad++;return}rows.push({d:d,out:idx.out>=0?(c[idx.out]||''):'',t:n(idx.t),p:n(idx.p),o:n(idx.o)})});
+    return {rows:rows,bad:bad};
+  }
+  function makeDemo(){
+    var today=ymd(new Date()),n=0;S.daily={};
+    S.outs.forEach(function(p,i){
+      var q=C.E[i],openDay=addDays(today,-(120-Math.max(0,(Math.round(p.start)-1)*30)));if(dayDiff(openDay,today)<7)return;
+      S.daily[p.id]={};var seed=i*97+13;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
+      for(var d=openDay;dayDiff(d,today)>0;d=addDays(d,1)){
+        var age=dayDiff(openDay,d),mo=Math.floor(age/30)+1,wd=pd(d).getDay(),wk=(wd===0||wd===6)?1.25:(wd===5?1.1:0.95);
+        var pk=Math.max(0,Math.round(q.jual*ramp(q,mo)*wk*(0.85+rnd()*0.3)*(1+age*0.0008)));
+        S.daily[p.id][d]={t:Math.round(pk/1.6),p:pk,o:Math.round(pk*q.harga/500)*500};n++;
+      }
+    });
+    S.demo=true;save();return n;
+  }
+
+  /* ================= HALAMAN INVESTOR ================= */
+  function invIdx(){var i=-1,k;for(k=0;k<S.outs.length;k++)if(S.outs[k].id===S.inv.oid){i=k;break}if(i<0){for(k=0;k<S.outs.length;k++)if(S.outs[k].owner!=='mitra'){i=k;break}}return i<0?0:i}
+  function collect(scope){
+    var map={};S.outs.forEach(function(p,i){if(scope!=='all'&&String(i)!==String(scope))return;var dd=dailyOf(p.id);Object.keys(dd).forEach(function(k){var e=dd[k],m=map[k]||(map[k]={t:0,p:0,o:0});m.t+=e.t;m.p+=e.p;m.o+=e.o})});
+    return map;
+  }
+  function periods(map,mode){
+    var keys=Object.keys(map).sort();if(!keys.length)return [];
+    var first=keys[0],last=keys[keys.length-1],out=[],k,i;
+    function agg(a,b){var r={t:0,p:0,o:0,days:0};for(var d=a;d<=b;d=addDays(d,1)){if(map[d]){r.t+=map[d].t;r.p+=map[d].p;r.o+=map[d].o;r.days++}}return r}
+    if(mode==='d'){var st=addDays(last,-29);if(st<first)st=first;for(k=st;k<=last;k=addDays(k,1)){var e=map[k];out.push({label:fmtD(k),full:HARI[pd(k).getDay()]+', '+fmtDY(k),o:e?e.o:0,p:e?e.p:0,t:e?e.t:0,days:e?1:0})}}
+    else if(mode==='w'){var ws=weekStart(last),fs=weekStart(first);for(i=11;i>=0;i--){var a=addDays(ws,-7*i);if(a<fs)continue;var r=agg(a,addDays(a,6));r.label=fmtD(a);r.full='Minggu '+fmtD(a)+' – '+fmtDY(addDays(a,6));out.push(r)}}
+    else if(mode==='m'){var L=pd(last),F=pd(first);for(i=11;i>=0;i--){var d=new Date(L.getFullYear(),L.getMonth()-i,1);if(d<new Date(F.getFullYear(),F.getMonth(),1))continue;var a2=ymd(d),b2=ymd(new Date(d.getFullYear(),d.getMonth()+1,0));var r2=agg(a2,b2);r2.label=MON[d.getMonth()]+" '"+String(d.getFullYear()).slice(2);r2.full=MON[d.getMonth()]+' '+d.getFullYear();out.push(r2)}}
+    else{for(var y=pd(first).getFullYear();y<=pd(last).getFullYear();y++){var r3=agg(y+'-01-01',y+'-12-31');r3.label=String(y);r3.full='Tahun '+y;out.push(r3)}}
+    return out;
+  }
+  function barChart(host,rows){
+    host.innerHTML='';var n=rows.length;if(!n)return;
+    var W=Math.max(260,host.clientWidth),H=250,m={l:62,r:10,t:18,b:34},iw=W-m.l-m.r,ih=H-m.t-m.b;
+    var sc=yScale(rows.map(function(r){return r.o})),bw=iw/n,bwd=Math.max(3,Math.min(44,bw*0.7)),Y=function(v){return m.t+(sc.max-v)/(sc.max-sc.min)*ih};
+    var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="Grafik omzet per periode">';
+    for(var v=sc.min;v<=sc.max+sc.st/2;v+=sc.st)s+='<line class="grid" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/><text class="ax" x="'+(m.l-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+rpS(v)+'</text>';
+    var every=Math.max(1,Math.ceil(n/Math.max(2,Math.floor(iw/56)))),withData=rows.filter(function(r){return r.days>0}),avg=withData.length?withData.reduce(function(a,r){return a+r.o},0)/withData.length:0;
+    rows.forEach(function(r,i){var cx=m.l+i*bw+bw/2,y=Y(r.o),h=Math.max(r.days?1:3,Y(0)-y);
+      s+='<rect class="'+(r.days?(i===n-1?'cbl':'cbp'):'cbe')+'" x="'+(cx-bwd/2).toFixed(1)+'" y="'+(r.days?y:Y(0)-3).toFixed(1)+'" width="'+bwd.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2"><title>'+r.full+': '+(r.days?rp(r.o)+' ('+nf.format(r.p)+' paket)':'tidak ada data')+'</title></rect>';
+      if((i%every===0&&n-1-i>=Math.max(1,Math.ceil(every*0.8)))||i===n-1)s+='<text class="ax" x="'+(i===n-1?Math.min(W-2,cx+bwd/2):cx)+'" y="'+(H-m.b+16)+'" text-anchor="'+(i===n-1?'end':'middle')+'">'+r.label+'</text>'});
+    if(avg>0&&n>2)s+='<line class="avgl" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(avg)+'" y2="'+Y(avg)+'"/><text class="avgt" x="'+(W-m.r-4)+'" y="'+(Y(avg)-5)+'" text-anchor="end">rata-rata '+rpS(avg)+'</text>';
+    s+='<line class="zero" x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+Y(0)+'" y2="'+Y(0)+'"/></svg>';host.innerHTML=s;
+  }
+  function invSeries(months){
+    var i=invIdx(),p=Object.assign({},S.outs[i],{owner:'own'}),q=eff(p,C.A),I=S.inv,rows=[],cum=0,ccum=0,payback=null;
+    for(var m=1;m<=months;m++){
+      var s=q.jual*ramp(q,m),rv=rev(q,s),pf=profitAt(q,s),pay=0;
+      if(I.skema==='omzet')pay=rv*I.po/100;
+      else if(I.skema==='cap'){var capAmt=I.cap*I.modal;if(cum<capAmt){pay=Math.max(0,pf)*I.p/100;if(cum+pay>capAmt){var over=cum+pay-capAmt;pay=capAmt-cum+over*(I.after/Math.max(I.p,1e-9))}}else pay=Math.max(0,pf)*I.after/100}
+      else pay=Math.max(0,pf)*I.p/100;
+      var prev=cum;cum+=pay;if(payback===null&&I.modal>0&&cum>=I.modal)payback=(m-1)+(I.modal-prev)/Math.max(pay,1e-9);
+      rows.push({m:m,rev:rv,profit:pf,pay:pay,cum:cum,own:pf-pay});
+    }
+    return {i:i,q:q,rows:rows,payback:payback};
+  }
+  function invPay(pf,rv,cumBefore){var I=S.inv;if(I.skema==='omzet')return rv*I.po/100;if(I.skema==='cap')return cumBefore<I.cap*I.modal?Math.max(0,pf)*I.p/100:Math.max(0,pf)*I.after/100;return Math.max(0,pf)*I.p/100}
+  function buildInvestor(){
+    var ii=invIdx();
+    $('iv_out').innerHTML=S.outs.map(function(p,i){return '<option value="'+i+'"'+(i===ii?' selected':'')+'>'+esc(oname(i))+(p.owner==='mitra'?' (mitra)':'')+'</option>'}).join('');
+    $('iv_scope').innerHTML='<option value="all">Semua outlet</option>'+S.outs.map(function(p,i){return '<option value="'+i+'">'+esc(oname(i))+'</option>'}).join('');$('iv_scope').value=U.ivs;
+    $('iv_modal').value=S.inv.modal;$('iv_p').value=S.inv.p;$('iv_po').value=S.inv.po;$('iv_cap').value=S.inv.cap;$('iv_after').value=S.inv.after;
+  }
+  function renderInvestor(){
+    var I=S.inv,sk=I.skema;
+    document.querySelectorAll('[data-skema]').forEach(function(b){b.classList.toggle('on',b.dataset.skema===sk)});
+    document.querySelectorAll('#view-investor [data-for]').forEach(function(f){f.hidden=f.dataset.for.split(' ').indexOf(sk)<0});
+    document.querySelectorAll('#iv_modes [data-mode]').forEach(function(b){b.classList.toggle('on',b.dataset.mode===U.ivm)});
+    $('ivDemo').hidden=!S.demo;
+    // Pertumbuhan penjualan
+    var map=collect(U.ivs),keys=Object.keys(map).sort(),has=keys.length>0;
+    $('iv-empty').hidden=has;$('iv-body').hidden=!has;$('iv-years').hidden=!has;
+    var scopeName=U.ivs==='all'?'semua outlet':oname(+U.ivs);
+    $('iv-intro').textContent=(has?'Data penjualan '+scopeName+' dari '+fmtDY(keys[0])+' sampai '+fmtDY(keys[keys.length-1])+'. ':'Belum ada data penjualan harian. ')+'Bagian bawah berisi proyeksi bagi hasil untuk '+oname(invIdx())+'.';
+    $('iv-tag').textContent=S.demo?'Data contoh + proyeksi':'Data nyata + proyeksi';
+    if(has){
+      var ps=periods(map,U.ivm),last=ps[ps.length-1],prev=ps.length>1?ps[ps.length-2]:null,names={d:'hari',w:'minggu',m:'bulan',y:'tahun'};
+      $('il1').textContent='Omzet '+(U.ivm==='d'?'hari terakhir':names[U.ivm]+' terakhir');
+      setNum($('iv1'),last.o,rp);$('in1').textContent=last.full+(U.ivm!=='d'?' · '+last.days+' hari ada data':'')+' · '+nf.format(last.p)+' paket';
+      // Pertumbuhan dengan jendela yang adil (tidak terpengaruh minggu/bulan yang belum lengkap)
+      var endK=keys[keys.length-1],win={d:1,w:7,m:30,y:365}[U.ivm],cmpTxt={d:'hari yang sama minggu lalu',w:'7 hari sebelumnya',m:'30 hari sebelumnya',y:'365 hari sebelumnya'}[U.ivm];
+      function sumWin(a,b){var o=0,n=0;keys.forEach(function(k){if(k>=a&&k<=b){o+=map[k].o;n++}});return {o:o,n:n}}
+      var cur,old;
+      if(U.ivm==='d'){cur=sumWin(endK,endK);old=sumWin(addDays(endK,-7),addDays(endK,-7))}
+      else{cur=sumWin(addDays(endK,-(win-1)),endK);old=sumWin(addDays(endK,-(2*win-1)),addDays(endK,-win))}
+      var enough=U.ivm==='d'?(cur.n&&old.n):(old.n>=Math.max(1,Math.round(win*0.6))&&cur.n>=Math.max(1,Math.round(win*0.6)));
+      if(enough){var a1=cur.o/cur.n,a0=old.o/old.n,g=(a1/a0-1)*100;setTxt($('iv2'),(g>=0?'+':'')+nf1.format(g)+'%');cls('ik2',g>=0?'good':'bad');$('in2').textContent=(U.ivm==='d'?HARI[pd(endK).getDay()]+' ini dibanding '+cmpTxt:(U.ivm==='w'?'7':U.ivm==='m'?'30':'365')+' hari terakhir dibanding '+cmpTxt)+' (rata-rata '+rpS(a0)+' → '+rpS(a1)+' per hari)'}
+      else{setTxt($('iv2'),'-');cls('ik2','');$('in2').textContent='Data belum cukup untuk membandingkan dengan '+cmpTxt}
+      var tot=keys.reduce(function(a,k){return a+map[k].o},0),totp=keys.reduce(function(a,k){return a+map[k].p},0);
+      (function(){
+        var B=function(x){return '<b>'+x+'</b>'},lead,gtxt='';
+        if(U.ivm==='d'){var e=map[endK];lead='Hari terakhir ('+HARI[pd(endK).getDay()]+', '+fmtDY(endK)+') omzet '+B(rp(e.o))+' dari '+B(nf.format(e.p)+' paket')+'.'}
+        else{var lbl={w:'7 hari terakhir',m:'30 hari terakhir',y:'365 hari terakhir'}[U.ivm];lead=lbl.charAt(0).toUpperCase()+lbl.slice(1)+' omzet '+B(rp(cur.o))+' dari '+cur.n+' hari berjualan, rata-rata '+B(rp(cur.o/Math.max(1,cur.n)))+' per hari.'}
+        if(enough){var gg=(cur.o/cur.n)/(old.o/old.n)*100-100;gtxt=' '+(gg>=0?'<span class="up">Naik '+nf1.format(gg)+'%</span>':'<span class="down">Turun '+nf1.format(-gg)+'%</span>')+' dibanding '+cmpTxt+'.'}
+        else gtxt=' Data belum cukup untuk membandingkan dengan '+cmpTxt+'.';
+        $('iv-sum').innerHTML=lead+gtxt+' Total sejak buka '+B(rp(keys.reduce(function(a,k){return a+map[k].o},0)))+' dari '+nf.format(keys.length)+' hari berjualan.'+(S.demo?' <i>(data contoh)</i>':'');
+      })();
+      var last30=keys.filter(function(k){return dayDiff(k,keys[keys.length-1])<30});
+      setNum($('iv3'),last30.reduce(function(a,k){return a+map[k].o},0)/Math.max(1,last30.length),rp);$('in3').textContent='Dari '+last30.length+' hari terakhir yang ada data';
+      setNum($('iv4'),tot,rp);$('in4').textContent=nf.format(keys.length)+' hari berjualan · '+nf.format(totp)+' paket';
+      barChart($('ivchart'),ps);
+      $('ivtab').innerHTML='<thead><tr><th>Periode</th><th>Hari ada data</th><th>Transaksi</th><th>Paket</th><th>Omzet</th><th>Rata-rata/hari</th></tr></thead><tbody>'+ps.slice().reverse().map(function(r){return '<tr><td>'+r.full+'</td><td>'+r.days+'</td><td>'+nf.format(r.t)+'</td><td>'+nf.format(r.p)+'</td><td>'+rp(r.o)+'</td><td>'+(r.days?rp(r.o/r.days):'-')+'</td></tr>'}).join('')+'</tbody>';
+      // per tahun operasional + kumulatif
+      var start=keys[0],yrs=[],cumo=0,cump=0;
+      for(var y=1;;y++){var a=addDays(start,365*(y-1)),b=addDays(start,365*y-1);if(a>keys[keys.length-1])break;var ro=0,rpk=0,dd=0;keys.forEach(function(k){if(k>=a&&k<=b){ro+=map[k].o;rpk+=map[k].p;dd++}});cumo+=ro;cump+=rpk;yrs.push({y:y,a:a,b:b,o:ro,p:rpk,dd:dd,co:cumo})}
+      $('ivytab').innerHTML='<thead><tr><th>Periode</th><th>Hari berjualan</th><th>Paket</th><th>Omzet tahun itu</th><th>Total kumulatif</th></tr></thead><tbody>'+yrs.map(function(r){return '<tr><td>Tahun ke-'+r.y+' <small class="hint">('+fmtDY(r.a)+' – '+fmtDY(r.b)+')</small></td><td>'+r.dd+'</td><td>'+nf.format(r.p)+'</td><td>'+rp(r.o)+'</td><td><b>'+rp(r.co)+'</b>'+(r.y>1?' <small class="hint">('+r.y+' tahun)</small>':'')+'</td></tr>'}).join('')+'</tbody>';
+    }
+    // Proyeksi bagi hasil
+    var P=invSeries(60),q=P.q,R=P.rows,io=oname(P.i),stable=R[R.length-1];
+    var skName={laba:'Bagi hasil laba '+nf1.format(I.p)+'%',omzet:'Bagi hasil omzet '+nf1.format(I.po)+'%',cap:'Bagi hasil laba '+nf1.format(I.p)+'% sampai '+nf1.format(I.cap)+'× modal, lalu '+nf1.format(I.after)+'%'}[sk];
+    $('iv-proj-desc').textContent=skName+' dari '+io+'. Modal investor '+rp(I.modal)+'. Angka per tahun dihitung dari proyeksi bulanan outlet.';
+    setNum($('ip1'),stable.pay,rp);$('iq1').textContent=sk==='cap'?'Setelah batas tercapai. Sebelumnya '+rpS(R[Math.min(11,R.length-1)].pay)+'/bulan':'Saat penjualan stabil';
+    if(P.payback!==null)setNum($('ip2'),P.payback,function(v){return '±'+nf1.format(v)+' bulan'});else setTxt($('ip2'),'Lebih dari 5 tahun');
+    $('iq2').textContent='Dari bagi hasil yang terkumpul';cls('ia2',P.payback!==null&&P.payback<=24?'good':'bad');
+    var c36=R[35].cum;setNum($('ip3'),c36,rp);$('iq3').textContent=I.modal>0?nf1.format(c36/I.modal*100)+'% dari modal ('+nf1.format(c36/I.modal)+'×)':'';
+    var yrows=[];for(var y2=1;y2<=5;y2++){var sl=R.slice((y2-1)*12,y2*12);yrows.push({y:y2,rev:sl.reduce(function(a,r){return a+r.rev},0),pf:sl.reduce(function(a,r){return a+r.profit},0),pay:sl.reduce(function(a,r){return a+r.pay},0),own:sl.reduce(function(a,r){return a+r.own},0),cum:sl[sl.length-1].cum})}
+    $('ivptab').innerHTML='<thead><tr><th>Tahun</th><th>Omzet outlet</th><th>Laba outlet</th><th class="hc">Bagian investor</th><th>Bagian pemilik</th><th class="hc">Total investor sejak awal</th></tr></thead><tbody>'+yrows.map(function(r){return '<tr><td>Tahun ke-'+r.y+'</td><td>'+rp(r.rev)+'</td><td class="'+(r.pf<0?'neg2':'')+'">'+rp(r.pf)+'</td><td class="hc">'+rp(r.pay)+'</td><td class="'+(r.own<0?'neg2':'')+'">'+rp(r.own)+'</td><td class="hc"><b>'+rp(r.cum)+'</b> <small class="hint">'+(r.y>1?r.y+' tahun':'1 tahun')+', '+(I.modal>0?nf1.format(r.cum/I.modal)+'× modal':'')+'</small></td></tr>'}).join('')+'</tbody>';
+    // Ringkasan kesepakatan
+    var H=function(x){return '<mark class="hl">'+x+'</mark>'};
+    function bar(inv,own,li,lo){inv=Math.max(0,Math.min(100,inv));return '<div class="splitlbl"><span>'+li+'</span><span>'+lo+'</span></div><div class="split" role="img" aria-label="'+li+', '+lo+'"><div class="si" style="width:'+inv+'%">'+(inv>=12?nf1.format(inv)+'%':'')+'</div><div class="so2" style="flex:1">'+(100-inv>=12?nf1.format(100-inv)+'%':'')+'</div></div>'}
+    var sp='<h3>Pembagian hasil</h3>';
+    if(sk==='laba'){sp+='<p>Setiap bulan, <b>laba bersih</b> outlet dibagi:</p>'+bar(I.p,100-I.p,'Investor '+nf1.format(I.p)+'%','Pemilik usaha '+nf1.format(100-I.p)+'%')}
+    else if(sk==='omzet'){sp+='<p>Investor menerima <b>'+nf1.format(I.po)+'% dari omzet</b> (penjualan kotor), dibayar walau outlet sedang rugi. Sisanya untuk menutup semua biaya dan bagian pemilik.</p>'+bar(I.po,100-I.po,'Investor '+nf1.format(I.po)+'% omzet','Biaya outlet + pemilik '+nf1.format(100-I.po)+'%')}
+    else{sp+='<p>Pembagian <b>laba bersih</b> dalam dua tahap:</p><div class="phase">Tahap 1 · sampai investor menerima '+nf1.format(I.cap)+'× modal ('+rp(I.cap*I.modal)+')</div>'+bar(I.p,100-I.p,'Investor '+nf1.format(I.p)+'%','Pemilik usaha '+nf1.format(100-I.p)+'%')+'<div class="phase">Tahap 2 · seterusnya</div>'+bar(I.after,100-I.after,'Investor '+nf1.format(I.after)+'%','Pemilik usaha '+nf1.format(100-I.after)+'%')}
+    sp+='<div class="keyline"><span>Modal investor: <b>'+rp(I.modal)+'</b></span><span>Perkiraan modal kembali: <b>'+(P.payback!==null?'±'+nf1.format(P.payback)+' bulan':'lebih dari 5 tahun')+'</b></span><span>Perkiraan diterima tahun pertama: <b>'+rp(yrows[0].pay)+'</b></span></div>';
+    $('iv-split').innerHTML=sp;
+    $('iv-rugi').textContent=sk==='omzet'?'Bagi hasil omzet tetap dibayar walau outlet sedang rugi.':'Bulan rugi tidak memberi bagi hasil laba.';
+    var t=[['Outlet yang didanai',H(io)+' (target '+nf1.format(q.jual)+' paket/hari)'],['Modal dari investor',H(rp(I.modal))],['Skema pembagian',H(skName)],
+      ['Perkiraan diterima investor',H(rp(R[11].pay))+' di bulan ke-12, '+H(rp(yrows[0].pay))+' di tahun pertama'],
+      ['Kapan dibayar','Setiap bulan, setelah laporan laba bulan itu selesai dihitung'],
+      ['Laporan',S.demo?'Grafik penjualan harian, mingguan, bulanan, tahunan (saat ini data contoh)':'Grafik penjualan harian, mingguan, bulanan, dan tahunan di halaman ini, plus laporan laba bulanan'],
+      ['Peran investor','Pasif: tidak ikut mengatur operasional, lokasi, dan marketing'],
+      ['Risiko',H(sk==='omzet'?'Penjualan bisa di bawah target':'Kalau outlet rugi, bulan itu tidak ada bagi hasil')+'. Proyeksi bukan janji hasil.']];
+    if(stable.own<0)t.push(['Peringatan','Bagian pemilik negatif saat stabil. Persen investor terlalu besar.']);
+    $('iv-terms').innerHTML=t.map(function(x){return '<li><span class="dot'+(x[0]==='Peringatan'||x[0]==='Risiko'?'':' ok')+'"></span><span><b>'+x[0]+'</b>: '+x[1]+'</span></li>'}).join('');
+    // Bagi hasil dari laporan bulanan nyata
+    var rid=S.outs[P.i].id,rr=S.real[rid]||{},ms=Object.keys(rr).map(Number).filter(function(m){return filled(rr[m])}).sort(function(a,b){return a-b});
+    $('iv-real').hidden=!ms.length;
+    if(ms.length){var cb=0;$('ivrtab').innerHTML='<thead><tr><th>Bulan ke</th><th>Omzet nyata</th><th>Laba nyata</th><th class="hc">Bagian investor</th><th class="hc">Total investor</th></tr></thead><tbody>'+ms.map(function(m){var r=rr[m],lb=actLaba(r),py=invPay(lb,r.omz,cb);cb+=py;return '<tr><td>'+m+'</td><td>'+rp(r.omz)+'</td><td class="'+(lb<0?'neg2':'')+'">'+rp(lb)+'</td><td class="hc">'+rp(py)+'</td><td class="hc"><b>'+rp(cb)+'</b></td></tr>'}).join('')+'</tbody>'}
+  }
+  // Event: harian
+  $('dd_out').addEventListener('change',function(){U.ddo=parseInt(this.value,10)||0;fillDaily();render()});
+  $('dd_date').addEventListener('change',function(){if(this.value){U.ddd=this.value;fillDaily();render()}});
+  $('dd_p').addEventListener('input',ddHint);
+  $('dd_save').addEventListener('click',saveDaily);
+  $('dd_del').addEventListener('click',function(){var id=S.outs[U.ddo].id;if(S.daily[id])delete S.daily[id][U.ddd];save();render();fillDaily();$('dd_msg').textContent='Data '+fmtDY(U.ddd)+' dihapus.'});
+  $('dd_tab').addEventListener('click',function(e){var b=e.target.closest('[data-dday]');if(!b)return;U.ddd=b.dataset.dday;$('dd_date').value=U.ddd;fillDaily();render()});
+  $('dd_csv').addEventListener('change',function(){
+    var f=this.files&&this.files[0];if(!f)return;var rd=new FileReader();this.value='';
+    rd.onload=function(){
+      if(S.demo){$('dd_csvmsg').textContent='Hapus data contoh dulu sebelum mengimpor data nyata.';return}
+      var res=parseCSV(String(rd.result||''));if(res.err){$('dd_csvmsg').textContent=res.err;return}
+      var n=0,other=0;res.rows.forEach(function(r){var i=U.ddo,nm=r.out.trim().toLowerCase();if(nm){var k=S.outs.findIndex?S.outs.findIndex(function(p,j){return oname(j).toLowerCase()===nm}):-1;if(k>=0)i=k;else other++}var id=S.outs[i].id;if(!S.daily[id])S.daily[id]={};S.daily[id][r.d]={t:r.t,p:r.p,o:r.o};n++});
+      save();render();fillDaily();$('dd_csvmsg').textContent=n+' baris diimpor'+(res.bad?', '+res.bad+' baris dilewati karena tanggal tidak terbaca':'')+(other?', '+other+' baris dengan nama outlet tidak dikenal dimasukkan ke '+oname(U.ddo):'')+'.';
+    };rd.readAsText(f);
+  });
+  $('dd_tpl').addEventListener('click',function(){if(!DL)return;var t='tanggal,outlet,transaksi,paket,omzet\n'+ymd(new Date())+','+oname(0)+',38,60,1200000\n';DL.save({filename:'contoh-penjualan-harian.csv',data:t}).then(function(){$('dd_csvmsg').textContent='Contoh format diunduh.'},function(e){dlErr(e,$('dd_csvmsg'))})});
+  $('demoMake').addEventListener('click',function(){var has=S.outs.some(function(p){return Object.keys(dailyOf(p.id)).length});if(has&&!S.demo){$('dd_msg').textContent='Sudah ada data nyata, data contoh tidak dibuat.';return}var n=makeDemo();render();fillDaily();$('dd_msg').textContent=n+' catatan harian contoh dibuat (gabungan semua outlet yang sudah buka).'});
+  function clearDemo(){if(!S.demo)return;S.daily={};S.demo=false;save();render();if(U.tab==='daily')fillDaily()}
+  $('demoClear').addEventListener('click',clearDemo);$('demoClear2').addEventListener('click',clearDemo);
+  // Event: investor
+  $('iv_out').addEventListener('change',function(){var i=parseInt(this.value,10);if(S.outs[i]){S.inv.oid=S.outs[i].id;S.inv.modal=S.outs[i].modal;$('iv_modal').value=S.inv.modal;save();render()}});
+  $('iv_scope').addEventListener('change',function(){U.ivs=this.value;render()});
+  [['iv_modal','modal'],['iv_p','p'],['iv_po','po'],['iv_cap','cap'],['iv_after','after']].forEach(function(x){$(x[0]).addEventListener('input',function(){S.inv[x[1]]=Math.max(0,num(this.value));if(x[1]==='cap')S.inv.cap=Math.max(1,S.inv.cap);save();render()})});
+  document.querySelectorAll('[data-skema]').forEach(function(b){b.addEventListener('click',function(){S.inv.skema=b.dataset.skema;save();render()})});
+  document.querySelectorAll('#iv_modes [data-mode]').forEach(function(b){b.addEventListener('click',function(){U.ivm=b.dataset.mode;render()})});
 
   /* ================= HALAMAN MITRA ================= */
   function refIdx(){var i=-1,k;for(k=0;k<S.outs.length;k++){if(S.outs[k].id===S.ref){i=k;break}}if(i<0){for(k=0;k<S.outs.length;k++){if(S.outs[k].owner==='mitra'){i=k;break}}}return i<0?0:i}
