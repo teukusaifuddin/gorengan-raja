@@ -386,6 +386,7 @@ body.present .pexit{display:inline-flex}
         <div><span class="l">Laba rencana</span><span class="v" id="rs2"></span></div>
         <div><span class="l">Laba nyata</span><span class="v" id="rs3"></span></div>
         <div><span class="l">Selisih</span><span class="v" id="rs4"></span></div>
+        <div><span class="l">Capaian omzet vs target</span><span class="v" id="rs5"></span></div>
       </div>
       <div class="row" style="margin-top:12px"><button class="btn sec" type="button" data-goto="real">Buka Rencana vs Nyata</button></div>
     </section>
@@ -631,8 +632,8 @@ body.present .pexit{display:inline-flex}
       {id:'harga',l:'Harga rata-rata per paket',pf:'Rp',min:5000,max:60000,step:500},
       {id:'jual',l:'Paket terjual per hari',sf:'paket',min:0,max:200,step:1,h:'Target kamu 50-70/hari. Coba juga lewat meter di "Laba menurut penjualan harian".'},
       {id:'hari',l:'Hari buka per bulan',sf:'hari',min:15,max:31,step:1},
-      {id:'ramp0',l:'Penjualan bulan pertama',sf:'% target',min:10,max:100,step:5,h:'Pelanggan butuh waktu kenal. Naik bertahap sampai 100%.'},
-      {id:'rampB',l:'Capai 100% di bulan ke',sf:'bulan',min:1,max:12,step:1}
+      {id:'ramp0',l:'Penjualan bulan pertama',sf:'% target',min:10,max:200,step:5,h:'Pelanggan butuh waktu kenal, jadi biasanya di bawah 100%. Bisa di atas 100% kalau pembukaan ramai (promo launching), lalu bergerak ke 100% (target).'},
+      {id:'rampB',l:'Stabil di target (100%) di bulan ke',sf:'bulan',min:1,max:12,step:1}
     ]},
     {t:'Biaya variabel (% omzet)',f:[
       {id:'bahan',l:'Bahan baku, minyak, gas, kemasan',sf:'%',min:20,max:80,step:0.5,h:'Margin kotor = 100% dikurangi biaya variabel. Paling akurat dihitung di Resep & HPP.'},
@@ -791,7 +792,7 @@ body.present .pexit{display:inline-flex}
   function profitAt(p,s){return rev(p,s)*(1-varPct(p))-fixed(p)}
   function ramp(p,age){
     if(p.rampB<=1||age>=p.rampB)return 1;
-    var r0=Math.min(1,Math.max(0,p.ramp0/100));
+    var r0=Math.max(0,p.ramp0/100);
     return r0+(1-r0)*(age-1)/(p.rampB-1);
   }
   function bepPaket(p){var cm=p.harga*p.hari*(1-varPct(p));return cm>0?fixed(p)/cm:Infinity}
@@ -966,9 +967,9 @@ body.present .pexit{display:inline-flex}
       '<div class="sl"><label for="'+pre+'m">Geser bulan</label><input type="range" id="'+pre+'m" min="0" max="36" step="1" value="12"><output id="'+pre+'mo"></output></div>';
   }
   function scrub(pre,mo,cum,pr,mb,c4){
-    var pc=mb>0?Math.max(0,Math.min(1,(cum+mb)/mb)):(cum>=0?1:0);
+    var raw=mb>0?Math.max(0,(cum+mb)/mb):(cum>=0?1:0),pc=Math.min(1,raw);
     $(pre+'pb').style.width=(pc*100)+'%';
-    $(pre+'pp').textContent=mb<=0?(cum>=0?'Tidak butuh modal':'-'):(cum>=0?'100% (sudah balik modal)':Math.round(pc*100)+'%');
+    $(pre+'pp').textContent=mb<=0?(cum>=0?'Tidak butuh modal':'-'):(nf.format(Math.round(raw*100))+'%'+(cum>=0?' (sudah balik modal)':''));
     $(pre+'mo').textContent='Bulan ke-'+mo;
     var e1=$(pre+'c1');e1.textContent=rp(cum);e1.className='v '+(cum<0?'bad':'good');
     $(pre+'c2').textContent=mo>0?rp(pr):'-';
@@ -1068,8 +1069,8 @@ body.present .pexit{display:inline-flex}
     $('dn6').textContent='Sejak outlet pertama buka. Modal outlet sendiri '+rpS(Co.modalOwn);cls('dk6',Co.bep!==null&&Co.bep<=36?'good':'bad');
 
     var tb=$('target-box'),target=S.target,avg=Co.nOwn?Co.ownLab/Co.nOwn:0;
-    if(Co.lab>=target&&target>0){tb.className='target ok';tb.innerHTML='<b>Target tercapai</b><span>Laba perusahaan '+rp(Co.lab)+'/bulan sudah di atas target '+rpS(target)+'.</span>'}
-    else if(avg>0){var extra=Math.ceil((target-Co.lab)/avg),mavg=Co.modalOwn/Co.nOwn;tb.className='target';tb.innerHTML='<b>+'+extra+' outlet lagi</b><span>untuk mencapai laba '+rpS(target)+'/bulan, dengan asumsi tiap outlet milik sendiri yang baru menghasilkan rata-rata '+rp(avg)+'. Modal tambahan sekitar '+rpS(extra*mavg)+'.</span>'}
+    if(Co.lab>=target&&target>0){tb.className='target ok';tb.innerHTML='<b>Target tercapai '+nf.format(Math.round(Co.lab/target*100))+'%</b><span>Laba perusahaan '+rp(Co.lab)+'/bulan, lebih '+rp(Co.lab-target)+' di atas target '+rpS(target)+'.</span>'}
+    else if(avg>0){var extra=Math.ceil((target-Co.lab)/avg),mavg=Co.modalOwn/Co.nOwn;tb.className='target';tb.innerHTML='<b>+'+extra+' outlet lagi</b><span>untuk mencapai laba '+rpS(target)+'/bulan, dengan asumsi tiap outlet milik sendiri yang baru menghasilkan rata-rata '+rp(avg)+'. Modal tambahan sekitar '+rpS(extra*mavg)+'. Capaian sekarang '+(target>0?nf.format(Math.round(Math.max(0,Co.lab)/target*100))+'%':'-')+' dari target.</span>'}
     else{tb.className='target bad';tb.innerHTML='<b>Target '+rpS(target)+'/bulan belum bisa dicapai</b><span>Rata-rata laba outlet milik sendiri masih nol atau negatif. Perbaiki angka outlet dulu.</span>'}
 
     // Kas yang perlu disiapkan
@@ -1090,7 +1091,7 @@ body.present .pexit{display:inline-flex}
     var rs=realSummary();
     if(rs.months){$('rsum').hidden=false;$('rsum-desc').textContent='Data nyata dari '+rs.outs+' outlet. Selisih positif berarti lebih baik dari rencana.';
       $('rs1').textContent=rs.months+' bulan';$('rs2').textContent=rp(rs.plan);var e3=$('rs3');e3.textContent=rp(rs.act);e3.className='v '+(rs.act<0?'bad':'good');
-      var e4=$('rs4');e4.textContent=(rs.act-rs.plan>=0?'+':'')+rp(rs.act-rs.plan);e4.className='v '+(rs.act-rs.plan<0?'bad':'good');}
+      var e4=$('rs4');e4.textContent=(rs.act-rs.plan>=0?'+':'')+rp(rs.act-rs.plan);e4.className='v '+(rs.act-rs.plan<0?'bad':'good');var e5=$('rs5');e5.textContent=capai(rs.ao,rs.po);e5.className='v '+(rs.ao>=rs.po?'good':'bad');}
     else{$('rsum').hidden=true;$('rsum-desc').textContent='Belum ada data nyata. Setelah outlet berjalan, isi angka kasir dan belanja tiap bulan supaya proyeksi bisa dicek dan diperbaiki.'}
 
     // Grafik kas
@@ -1248,14 +1249,15 @@ body.present .pexit{display:inline-flex}
   }
 
   /* ================= RENCANA VS NYATA ================= */
+  function capai(a,p){return p>0?nf.format(Math.round(a/p*100))+'%':'-'}
   function realGet(i,m){var r=S.real[S.outs[i].id];return r&&r[m]?r[m]:null}
   function actLaba(r){return r.omz-r.bahan-r.mkt-r.gaji-r.sewa-r.lain}
   function filled(r){return !!r&&RF.some(function(f){return r[f.k]>0})}
   function planFor(q,m){var s=q.jual*ramp(q,m),o=rev(q,s);return {omz:o,paket:s*q.hari,bahan:q.bahan/100*o,laba:profitAt(q,s)}}
   function monthsOf(i){var r=S.real[S.outs[i].id]||{};return Object.keys(r).map(Number).filter(function(m){return filled(r[m])}).sort(function(a,b){return a-b})}
   function realSummary(){
-    var res={months:0,plan:0,act:0,outs:0};
-    S.outs.forEach(function(p,i){var ms=monthsOf(i);if(ms.length)res.outs++;ms.forEach(function(m){var r=realGet(i,m);res.months++;res.plan+=planFor(C.E[i],m).laba;res.act+=actLaba(r)})});
+    var res={months:0,plan:0,act:0,outs:0,po:0,ao:0};
+    S.outs.forEach(function(p,i){var ms=monthsOf(i);if(ms.length)res.outs++;ms.forEach(function(m){var r=realGet(i,m);var pf=planFor(C.E[i],m);res.months++;res.plan+=pf.laba;res.act+=actLaba(r);res.po+=pf.omz;res.ao+=r.omz})});
     return res;
   }
   function buildReal(){
@@ -1286,11 +1288,13 @@ body.present .pexit{display:inline-flex}
       row('Omzet',pl.omz,a.omz,rp,true)+
       row('Paket per hari',pl.paket/hari,a.paket/hari,function(v){return nf1.format(v)},true)+
       row('Biaya bahan',bp,ba,function(v){return nf1.format(v)+'%'},false)+
-      row('Laba bersih',pl.laba,actLaba(a),rp,true)+'</tbody>';
-    var ms=monthsOf(i),rows=ms.map(function(mm){var rr=realGet(i,mm);return {m:mm,plan:planFor(q,mm).laba,act:actLaba(rr),r:rr}});
+      row('Laba bersih',pl.laba,actLaba(a),rp,true)+
+      (r&&filled(r)?'<tr class="tot"><td>Capaian penjualan vs target</td><td>100%</td><td>'+capai(a.paket,pl.paket)+'</td><td class="'+(a.paket>=pl.paket?'pos2':'neg2')+'">'+(pl.paket>0?((a.paket-pl.paket>=0?'+':'')+nf.format(Math.round((a.paket-pl.paket)/pl.paket*100))+' poin'):'-')+'</td></tr>'+
+       '<tr class="tot"><td>Capaian omzet vs target</td><td>100%</td><td>'+capai(a.omz,pl.omz)+'</td><td class="'+(a.omz>=pl.omz?'pos2':'neg2')+'">'+(pl.omz>0?((a.omz-pl.omz>=0?'+':'')+nf.format(Math.round((a.omz-pl.omz)/pl.omz*100))+' poin'):'-')+'</td></tr>':'')+'</tbody>';
+    var ms=monthsOf(i),rows=ms.map(function(mm){var rr=realGet(i,mm);var pf=planFor(q,mm);return {m:mm,plan:pf.laba,pp:pf.paket,act:actLaba(rr),r:rr}});
     $('rchart-desc').textContent=rows.length?oname(i)+': '+rows.length+' bulan berisi data. Total laba nyata '+rp(rows.reduce(function(s,x){return s+x.act},0))+' vs rencana '+rp(rows.reduce(function(s,x){return s+x.plan},0))+'.':'Grafik muncul setelah ada bulan yang diisi.';
     pairChart($('rchart'),rows);
-    $('rtab').innerHTML=rows.length?'<thead><tr><th>Bulan</th><th>Omzet nyata</th><th>Paket/hari</th><th>Bahan</th><th>Laba rencana</th><th>Laba nyata</th><th>Selisih</th></tr></thead><tbody>'+rows.map(function(x){var d=x.act-x.plan;return '<tr><td>'+x.m+'</td><td>'+rp(x.r.omz)+'</td><td>'+nf1.format(x.r.paket/hari)+'</td><td>'+(x.r.omz>0?nf1.format(x.r.bahan/x.r.omz*100)+'%':'-')+'</td><td>'+rp(x.plan)+'</td><td class="'+(x.act<0?'neg2':'')+'">'+rp(x.act)+'</td><td class="'+(d<0?'neg2':'pos2')+'">'+(d>=0?'+':'')+rp(d)+'</td></tr>'}).join('')+'</tbody>':'';
+    $('rtab').innerHTML=rows.length?'<thead><tr><th>Bulan</th><th>Omzet nyata</th><th>Paket/hari</th><th>Capaian target</th><th>Bahan</th><th>Laba rencana</th><th>Laba nyata</th><th>Selisih</th></tr></thead><tbody>'+rows.map(function(x){var d=x.act-x.plan;return '<tr><td>'+x.m+'</td><td>'+rp(x.r.omz)+'</td><td>'+nf1.format(x.r.paket/hari)+'</td><td class="'+(x.r.paket>=x.pp?'pos2':'neg2')+'">'+capai(x.r.paket,x.pp)+'</td><td>'+(x.r.omz>0?nf1.format(x.r.bahan/x.r.omz*100)+'%':'-')+'</td><td>'+rp(x.plan)+'</td><td class="'+(x.act<0?'neg2':'')+'">'+rp(x.act)+'</td><td class="'+(d<0?'neg2':'pos2')+'">'+(d>=0?'+':'')+rp(d)+'</td></tr>'}).join('')+'</tbody>':'';
     var use=rows.filter(function(x){return x.r.omz>0}).slice(-3);
     $('rapply').disabled=!use.length;
     if(use.length){var est=estimate(i,use);$('rapply-d').textContent='Dari '+use.length+' bulan terakhir yang berisi omzet: penjualan stabil sekitar '+nf1.format(est.jual)+' paket/hari (sudah disesuaikan dengan bulan awal yang sepi), bahan '+nf1.format(est.bahan)+'%, marketing '+nf1.format(est.mkt)+'%. Tombol ini mengganti angka outlet dengan angka tersebut'+(S.outs[i].useResep?' dan mematikan "ikut Resep & HPP" untuk outlet ini':'')+'.'}
